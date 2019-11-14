@@ -29,7 +29,7 @@ print('The state for the first agent looks like:', states[0])
 
 agent = Agent(state_size=state_size, action_size=action_size, random_seed=0)
 
-def ddpg(n_episodes=500, max_t=1000, solved_score=30.0, print_every=100, train_mode=True):
+def ddpg(n_episodes=300, max_t=1000, solved_score=30.0, print_every=100, train_mode=True):
     scores_window = deque(maxlen=print_every)
     scores = []
     for i_episode in range(1, n_episodes+1):
@@ -65,6 +65,7 @@ def ddpg(n_episodes=500, max_t=1000, solved_score=30.0, print_every=100, train_m
     return scores
 
 scores = ddpg()
+np.save("scores.npy", scores)
 
 # plot the scores
 fig = plt.figure()
@@ -73,5 +74,6 @@ plt.plot(np.arange(len(scores)), scores)
 plt.ylabel('Score')
 plt.xlabel('Episode #')
 plt.show()
+plt.savefig('/pic/curve.png')
 
 env.close()

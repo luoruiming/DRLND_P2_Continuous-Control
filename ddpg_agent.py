@@ -16,6 +16,7 @@ LR_CRITIC = 1e-3
 WEIGHT_decay = 0
 LEARN_EVERY = 20
 LEARN_NUM = 10
+
 OU_SIGMA = 0.2          # Ornstein-Uhlenbeck noise parameter
 OU_THETA = 0.15         # Ornstein-Uhlenbeck noise parameter
 EPSILON = 1.0           # explore->exploit noise process added to act step
@@ -66,7 +67,7 @@ class Agent():
             action = self.actor_local(state).cpu().data.numpy()
         self.actor_local.train()
         if add_noise:
-            action += self.noise.sample()
+            action += self.epsilon * self.noise.sample()
         return np.clip(action, -1, 1)
 
     def reset(self):
@@ -113,6 +114,10 @@ class Agent():
         # ---------------- update target networks ------------------ #
         self.soft_update(self.critic_local, self.critic_target, TAU)
         self.soft_update(self.actor_local, self.actor_target, TAU)
+
+        # ----------------- update noise -------------------- #
+        self.epsilon -= EPSILON_DECAY
+        self.noise.reset()
 
     def soft_update(self, local_model, target_model, tau):
         """Soft update model parameters
