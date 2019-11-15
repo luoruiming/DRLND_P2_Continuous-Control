@@ -60,11 +60,13 @@ The environment is considered solved, when the average (over 100 episodes) of th
 
 2. Place the file in the DRLND GitHub repository, in the `p2_continuous-control/` folder, and unzip (or decompress) the file. 
 
-My computer runs on Windows 10 (64-bit), so I implemented the Windows version, which *file_name* in class *UnityEnvironment* was set to "Reacher_Windows_x86_64/Reacher.exe".
+My computer runs on Windows 10 (64-bit), so I implemented the Windows version, which *file_name* in class *UnityEnvironment* was set to "Reacher_Windows_x86_64/Reacher.exe". I chose Version 2 to solve. It is noted that all codes should work for Version 1 as well.
 
 ### Instructions
 
-Follow the instructions in `Continuous_Control.ipynb` to get started with training your own agent!  
+Train the agents using DDPG algorithm: `python main.py --train`
+
+Test the agents with trained model: `python main.py --test`
 
 ### References
 
