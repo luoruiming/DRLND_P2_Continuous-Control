@@ -62,7 +62,7 @@ def ddpg(n_episodes=300, max_t=1000, solved_score=30.0, print_every=100):
         if i_episode % print_every == 0:
             print('\rEpisode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_window)))
         if np.mean(scores_window) >= solved_score:
-            print('\nEnvironment solved in {:d} episodes!\tAverage Score: {:.2f}'.format(i_episode - print_every,
+            print('\nEnvironment solved in {:d} episodes!\tAverage Score: {:.2f}'.format(i_episode,
                                                                                          np.mean(scores_window)))
             torch.save(agent.actor_local.state_dict(), 'saved_weights/checkpoint_actor.pth')
             torch.save(agent.critic_local.state_dict(), 'saved_weights/checkpoint_critic.pth')
@@ -105,4 +105,3 @@ elif args.test:
     print('Total score:', np.mean(scores))
 
 env.close()
-
